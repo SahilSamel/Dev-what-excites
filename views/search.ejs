@@ -1,0 +1,62 @@
+<link href="/css/styles.css" rel="stylesheet" type="text/css">
+<form method="get">
+    <input type="search" name="search">
+    <button type="submit">Search</button>
+</form>
+
+<section class="results">
+
+</section>
+
+<br>
+<input type="button" value="goBack">
+
+<script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const searchQuery = urlParams.get('search')
+
+    let displayResults = (data) => {
+        // var results = document.createElement("li");
+
+        for (let i = 0; i < data.hits.length; i++) {
+            var item = document.createElement("li");
+            var itemsection = document.createElement("section");
+            
+            var itemname = document.createElement("li");
+            itemname.appendChild(document.createTextNode(data.hits[i].fields.item_name))
+            
+            var itemcalories = document.createElement("li");
+            itemcalories.appendChild(document.createTextNode(data.hits[i].fields.nf_calories))
+            
+            var itemprotein = document.createElement("li");
+            itemprotein.appendChild(document.createTextNode(data.hits[i].fields.nf_protein))
+            
+            itemsection.appendChild(itemname);
+            itemsection.appendChild(itemcalories);
+            itemsection.appendChild(itemprotein);
+
+            var buttonsection = document.createElement("section");
+
+            var add = document.createElement('button');
+
+            add.innerHTML = "Add food";
+
+            buttonsection.appendChild(add);
+
+            item.appendChild(itemsection)
+            item.appendChild(buttonsection)
+            
+            document.querySelector('.results').appendChild(item);
+        }
+
+    }
+    
+    if (searchQuery){
+        fetch('https://api.nutritionix.com/v1_1/search/'+ searchQuery +'?results=0:20&fields=item_name,nf_calories,nf_protein&appId=a95b7d99&appKey=8bf17b6d7a5e249e89f5b57612de880b')
+        .then(response => response.json())
+        .then(data => displayResults(data))       
+    }
+    
+    
+</script>
