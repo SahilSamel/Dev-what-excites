@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-// const Diary = require("../models/diary").schema;
+
 
 const seekerSchema = new mongoose.Schema({
     username:{type: String, required:true},

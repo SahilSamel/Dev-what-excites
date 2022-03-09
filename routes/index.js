@@ -5,6 +5,7 @@ const router = express.Router();
 const passport =require("passport");
 const {checkAuthentication,checkLogin} = require("../config/authentication");
 const User = require("../models/seeker");
+const recruiters = require("../models/recruiters");
 
 router.get(
     "/",
@@ -15,26 +16,66 @@ router.get(
 );
 
 router.get(
-    "/login",
+    "/login_interviewee",
     checkLogin,
     (req,res) => {
-        res.render("login");
+        res.render("login_interviewee");
     }
 )
 
 router.post(
-    "/login",
+    "/login_interviewee",
     checkLogin,
     (req, res, next) => {
         passport.authenticate
         (
             'local',
             {
-                successRedirect: '/home/dashboard',
-                failureRedirect: '/login',
+                successRedirect: '/home/interviewee_dashboard',
+                failureRedirect: '/login_interviewee',
                 failureFlash: true
             }
         )(req, res, next);
+    }
+)
+
+router.get(
+    "/login_recruiter",
+    (req,res) => {
+        res.render("login_recruiter");
+    }
+)
+
+router.get(
+    "/recruiter_dashboard",
+    (req,res) => {
+        res.render("recruiter_dashboard")
+    }
+)
+
+router.post(
+    "/login_recruiter",
+    async(req, res, next) => {
+        try{
+            const recruiter = await recruiters.findOne({name:req.body.name});
+            email = recruiter.email;
+            id = recruiter.id;
+            if(recruiter.id === req.body.id && recruiter.email===req.body.email ){
+                res.redirect("/recruiter_dashboard")
+                
+            }
+        }catch (error) {
+            res.redirect("/login_recruiter")
+        }
+        
+
+    }
+)
+
+router.get(
+    "/logoutrecruiter",
+    (req,res) => {
+        res.render("homepage")
     }
 )
 

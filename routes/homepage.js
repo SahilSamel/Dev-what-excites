@@ -8,10 +8,10 @@ const {checkAuthentication,checkLogin} = require("../config/authentication");
 
 
 router.get(
-    "/dashboard",
+    "/interviewee_dashboard",
     checkAuthentication,
     (req, res) => {
-        res.render("dashboard", {username: req.user.username})
+        res.render("interviewee_dashboard", {username: req.user.username})
     }
 )
 
@@ -22,5 +22,7 @@ router.get(
         res.render("profile",{username: req.user.username})
     }
 )
+
+
 
 module.exports = router;
