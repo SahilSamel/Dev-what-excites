@@ -1,0 +1,32 @@
+{
+  "name": "myfitnesspal",
+  "version": "1.0.0",
+  "description": "MyFitnessPal",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon --ext js,pug --ignore public"
+  },
+  "author": "Sahil Samel",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.2",
+    "joi": "^17.5.0",
+    "joi-objectid": "^4.0.2",
+    "mongodb": "^4.3.0",
+    "mongoose": "^6.1.6",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

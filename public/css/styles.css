@@ -1,0 +1,7 @@
+.results li{
+    display: flex;
+}
+
+#buttonsection{
+    right: 0;
+}
